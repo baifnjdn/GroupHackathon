@@ -39,13 +39,20 @@ struct HomePage: View {
                 }
             }
             
-            
-            
-            Button ("add chore test") {
-                choreManager.addChore(name: "Clean dishes", personName: "Jason", deadline: Date.now)
-            }
-                        
             Spacer()
+            
+            
+            
+            
+            Button {
+                choreManager.addChore(name: "Clean dishes", personName: "Jason", deadline: Date.now)
+                
+            } label: {
+                Image(systemName: "plus.circle")
+                    .font(.title2)
+            }
+
+                        
         }
         .padding()
         .onAppear {
