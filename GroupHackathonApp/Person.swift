@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@Observable
 class Person {
     
     var id = UUID()

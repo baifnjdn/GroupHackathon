@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-class Chore {
+@Observable
+class Chore: Identifiable {
     
     var id = UUID()
     var isCompleted: Bool = false

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@Observable
 class ChoreManager {
     var chores: [Chore] = []
     var people: [String: Person] = [:]
@@ -19,8 +20,8 @@ class ChoreManager {
         if let alreadyExist = people[personName] {
             person = alreadyExist
         } else {
-            person = Person(name: name)
-            people[name] = person
+            person = Person(name: personName)
+            people[personName] = person
         }
         
         let chore = Chore(

@@ -8,15 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var choreManager = ChoreManager()
     var body: some View {
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            
+            Text(Date.now, format: .dateTime.day().month().hour().minute())
+                .bold()
+                .font(.title)
+                .padding()
+            
+            
+            Grid {
+                GridRow {
+                    Text("Chore")
+                    Text("In-charge")
+                    Text("Due")
+                }
+                Divider()
+                
+                ForEach(choreManager.chores) {
+                    chore in
+                    GridRow {
+                        Text(chore.name)
+                        Text(chore.person.name)
+                        Text(chore.deadline, format: .dateTime.hour().minute())
+                    }
+                    .padding(.vertical, 5)
+                }
+            }
+            
+            
+            
+            Button ("add chore test") {
+                choreManager.addChore(name: "Clean dishes", personName: "Jason", deadline: Date.now)
+            }
+                        
+            Spacer()
         }
         .padding()
+        .onAppear {
+            // testing purposes
+            choreManager.addChore(name: "Clean dishes", personName: "Jason", deadline: Date.now)
+        }
     }
+
 }
 
 #Preview {
