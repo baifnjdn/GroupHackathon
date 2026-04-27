@@ -33,4 +33,13 @@ class ChoreManager {
         person.chores.append(chore)
     }
     
+    func completeChore(choreNumber: Int) {
+        if choreNumber >= chores.count {
+            print("Invalid Index")
+            return
+        }
+        
+        chores[choreNumber].isCompleted = true
+    }
+    
 }
