@@ -34,9 +34,17 @@ struct HomePage: View {
         NavigationStack {
             VStack {
                 
-                Text(Date.now, format: .dateTime.day().month().hour().minute())
+                Text("FairShare")
                     .bold()
                     .font(.largeTitle)
+                    .foregroundStyle(.font)
+                    .padding()
+                
+                Divider()
+                
+                Text(Date.now, format: .dateTime.day().month().hour().minute())
+                    .bold()
+                    .font(.title2)
                     .foregroundStyle(.font)
                     .padding()
                 
@@ -47,6 +55,7 @@ struct HomePage: View {
                         Text("In-charge")
                         Text("Due")
                     }
+                    
                     Divider()
                     
                     ForEach(choreManager.chores) {
@@ -56,11 +65,14 @@ struct HomePage: View {
                             GridRow {
                                 
                                 Text(chore.name)
+                                    .frame(maxWidth: .infinity)
                                 Text(chore.person.name)
                                 
                                 Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
                                 
+                                
                                 MenuComponent(delete: {choreManager.deleteChore(id: chore.id)}, edit: {})
+                                    .padding(.horizontal, 8)
                             }
                             .padding(.vertical, 5)
                             .onTapGesture(count: 2) {
@@ -93,9 +105,9 @@ struct HomePage: View {
         .onAppear() {
             // testing purposes
             choreManager.addChore(choreName: "Do dishes", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 0))
-            choreManager.addChore(choreName: "Clean floor", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 3600*24*3))
-            choreManager.addChore(choreName: "Something", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 3600))
-            choreManager.addChore(choreName: "Something else", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 3600*24))
+            choreManager.addChore(choreName: "Clean floor", personName: "Adeline", dueDate: Date(timeIntervalSinceNow: 3600*24*3))
+            choreManager.addChore(choreName: "Something", personName: "Precious", dueDate: Date(timeIntervalSinceNow: 3600))
+            choreManager.addChore(choreName: "Something else", personName: "Harjap", dueDate: Date(timeIntervalSinceNow: 3600*24))
         }
         
         

@@ -22,7 +22,7 @@ struct MenuComponent: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 20, height: 40, alignment: .trailing)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.appBackground)
                 Image(systemName: "ellipsis")
                     .frame(alignment: .center)
                     .foregroundStyle(.black)
