@@ -35,7 +35,7 @@ struct HomePage: View {
                         GridRow {
                             Text(chore.name)
                             Text(chore.person.name)
-                            Text(chore.deadline, format: .dateTime.hour().minute())
+                            Text(chore.dueDate, format: .dateTime.hour().minute())
                         }
                         .padding(.vertical, 5)
                     }

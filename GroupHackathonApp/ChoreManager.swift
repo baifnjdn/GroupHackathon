@@ -13,7 +13,7 @@ class ChoreManager {
     var people: [String: Person] = [:]
     
     
-    func addChore(choreName: String, personName: String, deadline: Date) {
+    func addChore(choreName: String, personName: String, dueDate: Date) {
         
         var person: Person
         
@@ -27,11 +27,12 @@ class ChoreManager {
         let chore = Chore(
             name: choreName,
             person: person,
-            deadline: deadline
+            dueDate: dueDate
         )
         
         chores.append(chore)
         person.chores.append(chore)
+        chores.sort(by: { $0.dueDate < $1.dueDate })
     }
     
     func completeChore(choreNumber: Int) {

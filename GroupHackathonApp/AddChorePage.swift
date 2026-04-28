@@ -57,6 +57,7 @@ struct AddChorePage: View {
             } label: {
                 Text("Add Chore")
             }
+            .disabled(choreName.isEmpty || personName.isEmpty)
         }
 
     }

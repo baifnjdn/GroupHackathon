@@ -14,12 +14,12 @@ class Chore: Identifiable {
     var isCompleted: Bool = false
     var name: String
     var person: Person
-    var deadline: Date
+    var dueDate: Date
     
     
-    init(name: String, person: Person, deadline: Date) {
+    init(name: String, person: Person, dueDate: Date) {
         self.name = name
         self.person = person
-        self.deadline = deadline
+        self.dueDate = dueDate
     }
 }
