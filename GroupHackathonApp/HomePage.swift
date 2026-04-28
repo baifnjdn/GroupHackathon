@@ -10,7 +10,7 @@ import SwiftUI
 struct HomePage: View {
     
     
-    @State var choreManager = ChoreManager()
+    @State var choreManager: ChoreManager
     var body: some View {
         
         NavigationStack {
@@ -59,8 +59,4 @@ struct HomePage: View {
         }
     }
 
-}
-
-#Preview {
-    HomePage()
 }

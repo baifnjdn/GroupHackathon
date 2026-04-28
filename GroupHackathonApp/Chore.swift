@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import SwiftData
 
-@Observable
+@Model
 class Chore: Identifiable {
     
     var id = UUID()

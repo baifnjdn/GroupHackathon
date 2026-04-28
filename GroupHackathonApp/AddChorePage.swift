@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct AddChorePage: View {
     @Environment(\.dismiss) var dismiss
     @State var choreName: String = ""

@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
-@Observable
+
+@Model
 class Person {
     
     var id = UUID()
