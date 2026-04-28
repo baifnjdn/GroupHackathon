@@ -39,15 +39,26 @@ class ChoreManager {
         person.chores.append(chore)
         chores.sort(by: { $0.dueDate < $1.dueDate })
         saveChore(chore: chore)
+        
     }
     
-    func completeChore(choreNumber: Int) {
-        if choreNumber >= chores.count {
-            print("Invalid Index")
-            return
+    func deleteChore(id: UUID) {
+        
+        chores.removeAll(where: {
+            $0.id == id
+        })
+        
+        saveData()
+    }
+    
+    func completeChore(id: UUID) {
+        for chore in chores {
+            if chore.id == id {
+                chore.isCompleted = true
+            }
         }
         
-        chores[choreNumber].isCompleted = true
+        saveData()
     }
     
 
@@ -63,10 +74,8 @@ class ChoreManager {
 //            let chore = try context.fetch(FetchDescriptor<Chore>())
 //            print("After save fetch:", chore.count)
         } catch {
-            print("Failed to save folder.")
+            print("Failed to save chores.")
         }
-        
-
     }
     
     func loadChores() {
@@ -84,9 +93,20 @@ class ChoreManager {
             
         } catch {
             
-            print("Failed to load folder.")
+            print("Failed to load chores.")
         }
         
         return
+    }
+    
+    func saveData() {
+        do {
+            
+            try context.save()
+            print("Saved")
+            
+        } catch {
+            print("Failed to save chores.")
+        }
     }
 }

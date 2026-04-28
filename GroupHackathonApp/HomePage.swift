@@ -52,18 +52,34 @@ struct HomePage: View {
                         chore in
                         GridRow {
                             Text(chore.name)
+                                .frame(maxWidth: .infinity)
                             Text(chore.person.name)
                             
                             Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
-
                             
+                            Menu {
+                                Button("Delete", action: {choreManager.deleteChore(id: chore.id)})
+                                Button("Edit", action: {})
+                            } label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(width: 20, height: 40, alignment: .trailing)
+                                        .foregroundStyle(.white)
+                                    Image(systemName: "ellipsis")
+                                        .frame(alignment: .center)
+                                        .foregroundStyle(.black)
+                                        .rotationEffect(Angle(degrees: 90))
+                                }
+                            }
+                            .padding(.horizontal, 4)
+                            .frame(alignment: .trailing)
+                            .fixedSize()
                         }
                         .padding(.vertical, 5)
                     }
                 }
                 
                 Spacer()
-                
                 
                 
                 NavigationLink {
@@ -85,5 +101,7 @@ struct HomePage: View {
             choreManager.addChore(choreName: "Something", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 3600))
             choreManager.addChore(choreName: "Something else", personName: "Jason", dueDate: Date(timeIntervalSinceNow: 3600*24))
         }
+        
+        
     }
 }

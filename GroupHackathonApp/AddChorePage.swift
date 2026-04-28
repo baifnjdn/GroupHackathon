@@ -37,8 +37,6 @@ struct AddChorePage: View {
                     .font(.title3)
                 TextField("Enter chore description...", text: $choreName)
                 
-
-
                 DatePicker (
                     "Due Date:",
                     selection: $dueDate,
