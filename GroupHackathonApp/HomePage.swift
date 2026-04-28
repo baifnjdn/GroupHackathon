@@ -18,7 +18,8 @@ struct HomePage: View {
                 
                 Text(Date.now, format: .dateTime.day().month().hour().minute())
                     .bold()
-                    .font(.title)
+                    .font(.largeTitle)
+                    .foregroundStyle(.font)
                     .padding()
                 
                 
@@ -52,10 +53,12 @@ struct HomePage: View {
                     Image(systemName: "plus.circle")
                         .font(.title2)
                 }
+                .foregroundStyle(.font)
+                
                 
                 
             }
-            .padding()
+            .background(.appBackground)
         }
     }
 
