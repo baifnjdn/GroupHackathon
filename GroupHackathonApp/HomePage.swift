@@ -50,32 +50,25 @@ struct HomePage: View {
                     
                     ForEach(choreManager.chores) {
                         chore in
-                        GridRow {
-                            Text(chore.name)
-                                .frame(maxWidth: .infinity)
-                            Text(chore.person.name)
+                        if !chore.isCompleted {
                             
-                            Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
-                            
-                            Menu {
-                                Button("Delete", action: {choreManager.deleteChore(id: chore.id)})
-                                Button("Edit", action: {})
-                            } label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .frame(width: 20, height: 40, alignment: .trailing)
-                                        .foregroundStyle(.white)
-                                    Image(systemName: "ellipsis")
-                                        .frame(alignment: .center)
-                                        .foregroundStyle(.black)
-                                        .rotationEffect(Angle(degrees: 90))
+                            GridRow {
+                                
+                                Text(chore.name)
+                                Text(chore.person.name)
+                                
+                                Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
+                                
+                                MenuComponent(delete: {choreManager.deleteChore(id: chore.id)}, edit: {})
+                            }
+                            .padding(.vertical, 5)
+                            .onTapGesture(count: 2) {
+                                withAnimation {
+                                    choreManager.completeChore(id: chore.id)
                                 }
                             }
-                            .padding(.horizontal, 4)
-                            .frame(alignment: .trailing)
-                            .fixedSize()
                         }
-                        .padding(.vertical, 5)
+                    
                     }
                 }
                 

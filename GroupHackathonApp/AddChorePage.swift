@@ -22,7 +22,7 @@ struct AddChorePage: View {
         VStack {
             
             Text("Add Chore")
-                .font(.largeTitle)
+                .font(.title)
                 .bold()
                 .padding()
             
