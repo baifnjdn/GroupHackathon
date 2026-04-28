@@ -29,6 +29,20 @@ struct HomePage: View {
         return .dateTime.hour().minute()
     }
     
+    private func personColor(for name: String) -> Color {
+        let colors: [Color] = [
+            .pink.opacity(0.65),
+            .blue.opacity(0.65),
+            .purple.opacity(0.65),
+            .orange.opacity(0.65),
+            .green.opacity(0.65),
+            .yellow.opacity(0.75)
+        ]
+        
+        let index = abs(name.hashValue) % colors.count
+        return colors [index]
+    }
+    
     var body: some View {
         
         NavigationStack {
@@ -67,6 +81,10 @@ struct HomePage: View {
                                 Text(chore.name)
                                     .frame(maxWidth: .infinity)
                                 Text(chore.person.name)
+                                    .bold()
+                                    .padding(8)
+                                    .background(personColor(for: chore.person.name))
+                                    .cornerRadius(10)
                                 
                                 Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
                                 

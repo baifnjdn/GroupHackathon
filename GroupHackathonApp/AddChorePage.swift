@@ -19,46 +19,69 @@ struct AddChorePage: View {
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Text("Add Chore")
-                .font(.title)
-                .bold()
-                .padding()
-            
-            VStack(alignment: .leading) {
-                Text("Person Responsible:")
-                    .bold()
-                    .font(.title3)
-                TextField("Enter name...", text: $personName)
+            Color("AppBackground")
+                .ignoresSafeArea()
+            VStack {
                 
-                Text("Chore Description:")
-                    .bold()
-                    .font(.title3)
-                TextField("Enter chore description...", text: $choreName)
-                
-                DatePicker (
-                    "Due Date:",
-                    selection: $dueDate,
-                    displayedComponents: [.date, .hourAndMinute]
-                )
-                .bold()
-                .font(.title3)
-                
-            }
-            .padding()
-            
-            Spacer()
-            
-            Button {
-                addChore(choreName, personName, dueDate)
-                choreAdded = true
-                dismiss()
-                
-            } label: {
                 Text("Add Chore")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color("FontColor"))
+                    .padding()
+                
+                VStack(alignment: .leading) {
+                    Text("Person Responsible:")
+                        .bold()
+                        .font(.title3)
+                        .foregroundColor(Color("FontColor"))
+                    
+                    
+                    TextField("Enter name...", text: $personName)
+                        .padding()
+                        .cornerRadius(12)
+                    
+                    Text("Chore Description:")
+                        .bold()
+                        .font(.title3)
+                        .foregroundColor(Color("FontColor"))
+                    
+                    TextField("Enter chore description...", text: $choreName)
+                        .padding()
+                        .cornerRadius(12)
+                    
+                    DatePicker (
+                        "Due Date:",
+                        selection: $dueDate,
+                        displayedComponents: [.date, .hourAndMinute]
+                    )
+                    .bold()
+                    .font(.title3)
+                    .foregroundColor(Color("FontColor"))
+                    
+                }
+                .padding()
+                
+                Spacer()
+                
+                Button {
+                    addChore(choreName, personName, dueDate)
+                    choreAdded = true
+                    dismiss()
+                    
+                } label: {
+                    Text("Add Chore")
+                        .bold()
+                        .foregroundColor(Color("AppBackground"))
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("FontColor"))
+                        .cornerRadius(15)
+                        .padding()
+                }
+                .disabled(choreName.isEmpty || personName.isEmpty)
             }
-            .disabled(choreName.isEmpty || personName.isEmpty)
         }
 
     }
