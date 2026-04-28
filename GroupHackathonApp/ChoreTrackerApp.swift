@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 @main
 struct ChoreTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoadingView()
         }
+        .modelContainer(for: Chore.self)
     }
 }

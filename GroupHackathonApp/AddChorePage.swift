@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct AddChorePage: View {
     @Environment(\.dismiss) var dismiss
     @State var choreName: String = ""
@@ -21,7 +22,7 @@ struct AddChorePage: View {
         VStack {
             
             Text("Add Chore")
-                .font(.largeTitle)
+                .font(.title)
                 .bold()
                 .padding()
             
@@ -57,6 +58,7 @@ struct AddChorePage: View {
             } label: {
                 Text("Add Chore")
             }
+            .disabled(choreName.isEmpty || personName.isEmpty)
         }
 
     }

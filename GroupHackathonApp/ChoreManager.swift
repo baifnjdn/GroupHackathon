@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 class ChoreManager {
     var chores: [Chore] = []
     var people: [String: Person] = [:]
+    var context: ModelContext
     
+    init(context: ModelContext) {
+        self.context = context
+    }
     
-    func addChore(choreName: String, personName: String, deadline: Date) {
+    func addChore(choreName: String, personName: String, dueDate: Date) {
         
         var person: Person
         
@@ -27,20 +32,81 @@ class ChoreManager {
         let chore = Chore(
             name: choreName,
             person: person,
-            deadline: deadline
+            dueDate: dueDate
         )
         
         chores.append(chore)
         person.chores.append(chore)
+        chores.sort(by: { $0.dueDate < $1.dueDate })
+        saveChore(chore: chore)
+        
     }
     
-    func completeChore(choreNumber: Int) {
-        if choreNumber >= chores.count {
-            print("Invalid Index")
-            return
+    func deleteChore(id: UUID) {
+        
+        chores.removeAll(where: {
+            $0.id == id
+        })
+        
+        saveData()
+    }
+    
+    func completeChore(id: UUID) {
+        for chore in chores {
+            if chore.id == id {
+                chore.isCompleted = true
+            }
         }
         
-        chores[choreNumber].isCompleted = true
+        saveData()
     }
     
+
+    
+    func saveChore(chore: Chore) {
+        context.insert(chore)
+        do {
+            
+            try context.save()
+            
+            print("Chore saved")
+            
+//            let chore = try context.fetch(FetchDescriptor<Chore>())
+//            print("After save fetch:", chore.count)
+        } catch {
+            print("Failed to save chores.")
+        }
+    }
+    
+    func loadChores() {
+        do {
+            
+            let descriptor = FetchDescriptor<Chore>()
+            let savedChores = try context.fetch(descriptor)
+            
+            print("Successfully \(savedChores.count) chores")
+            
+            // automatically generates the people as well
+            for chore in savedChores {
+                addChore(choreName: chore.name, personName: chore.person.name, dueDate: chore.dueDate)
+            }
+            
+        } catch {
+            
+            print("Failed to load chores.")
+        }
+        
+        return
+    }
+    
+    func saveData() {
+        do {
+            
+            try context.save()
+            print("Saved")
+            
+        } catch {
+            print("Failed to save chores.")
+        }
+    }
 }
