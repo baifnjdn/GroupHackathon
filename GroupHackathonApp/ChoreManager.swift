@@ -87,9 +87,9 @@ class ChoreManager {
             print("Successfully \(savedChores.count) chores")
             
             // automatically generates the people as well
-            for chore in savedChores {
-                addChore(choreName: chore.name, personName: chore.person.name, dueDate: chore.dueDate)
-            }
+//            for chore in savedChores {
+//                addChore(choreName: chore.name, personName: chore.person.name, dueDate: chore.dueDate)
+//            }
             
         } catch {
             

@@ -29,18 +29,18 @@ struct HomePage: View {
         return .dateTime.hour().minute()
     }
     
-    private func personColor(for name: String) -> Color {
-        let colors: [Color] = [
-            .pink.opacity(0.65),
-            .blue.opacity(0.65),
-            .purple.opacity(0.65),
-            .orange.opacity(0.65),
-            .green.opacity(0.65),
-            .yellow.opacity(0.75)
-        ]
+    private func uniqueColor(id: UUID) -> Color {
+        let data = id.uuid
+        let bytes = [data.0, data.1, data.2, data.3,
+                     data.4, data.5, data.6, data.7,
+                     data.8, data.9, data.10, data.11,
+                     data.12, data.13, data.14, data.15]
         
-        let index = abs(name.hashValue) % colors.count
-        return colors [index]
+        let hue = Double(bytes[0]) / 255.0
+        let saturation = 0.6 + Double(bytes[1]) / 255.0 * 0.4
+        let brightness = 0.7 + Double(bytes[2]) / 255.0 * 0.3
+        
+        return Color(hue: hue, saturation: saturation, brightness: brightness).opacity(0.3)
     }
     
     var body: some View {
@@ -83,7 +83,7 @@ struct HomePage: View {
                                 Text(chore.person.name)
                                     .bold()
                                     .padding(8)
-                                    .background(personColor(for: chore.person.name))
+                                    .background(uniqueColor(id: chore.person.id))
                                     .cornerRadius(10)
                                 
                                 Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
