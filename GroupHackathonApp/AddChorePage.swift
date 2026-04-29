@@ -54,6 +54,7 @@ struct AddChorePage: View {
                     DatePicker (
                         "Due Date:",
                         selection: $dueDate,
+                        in: Date()...,
                         displayedComponents: [.date, .hourAndMinute]
                     )
                     .bold()
