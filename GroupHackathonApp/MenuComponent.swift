@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MenuComponent: View {
     var delete: () -> Void
-    var edit: () -> Void
+    var addChore: (String, String, Date) -> Void
+    var choreName: String
+    var personName: String
+   
     
     var body: some View {
         Menu {
@@ -17,7 +20,12 @@ struct MenuComponent: View {
                 withAnimation {
                     delete()
                 }})
-            Button("Edit", action: {})
+            NavigationLink {
+                EditChorePage(choreName: choreName, personName: personName, addChore: addChore, deleteChore: delete)
+            } label: {
+                Text("Edit")
+            }
+            .foregroundStyle(.font)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -35,6 +43,6 @@ struct MenuComponent: View {
     }
 }
 
-#Preview {
-    MenuComponent(delete: {}, edit: {})
-}
+//#Preview {
+//    MenuComponent(delete: {}, edit: {})
+//}

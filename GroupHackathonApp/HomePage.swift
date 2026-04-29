@@ -29,20 +29,6 @@ struct HomePage: View {
         return .dateTime.hour().minute()
     }
     
-    private func uniqueColor(id: UUID) -> Color {
-        let data = id.uuid
-        let bytes = [data.0, data.1, data.2, data.3,
-                     data.4, data.5, data.6, data.7,
-                     data.8, data.9, data.10, data.11,
-                     data.12, data.13, data.14, data.15]
-        
-        let hue = Double(bytes[0]) / 255.0
-        let saturation = 0.6 + Double(bytes[1]) / 255.0 * 0.4
-        let brightness = 0.7 + Double(bytes[2]) / 255.0 * 0.3
-        
-        return Color(hue: hue, saturation: saturation, brightness: brightness).opacity(0.3)
-    }
-    
     var body: some View {
         
         NavigationStack {
@@ -83,13 +69,13 @@ struct HomePage: View {
                                 Text(chore.person.name)
                                     .bold()
                                     .padding(8)
-                                    .background(uniqueColor(id: chore.person.id))
+                                    .background(chore.person.colorTag)
                                     .cornerRadius(10)
                                 
                                 Text(chore.dueDate, format: dateFormatStyle(date: chore.dueDate))
                                 
                                 
-                                MenuComponent(delete: {choreManager.deleteChore(id: chore.id)}, edit: {})
+                                MenuComponent(delete: {choreManager.deleteChore(id: chore.id)}, addChore: choreManager.addChore, choreName: chore.name, personName: chore.person.name)
                                     .padding(.horizontal, 8)
                             }
                             .padding(.vertical, 5)
